@@ -22,13 +22,12 @@ export const Nav = styled.ul`
   }
 
   li {
-
     a {
       color: inherit;
       text-decoration: none;
       font-size: 13px;
       line-height: 32px;
-      font-weight: ${props => (props.main ? "bold" : "normal")}
+      font-weight: ${props => (props.main ? "bold" : "normal")};
 
       &:hover {
         color: #fff;
