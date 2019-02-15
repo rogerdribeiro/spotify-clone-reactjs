@@ -20,9 +20,9 @@ export default function(state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-  getPlayListsRequest: () => ({ type: Types.GET_REQUEST }),
+  getPlaylistsRequest: () => ({ type: Types.GET_REQUEST }),
 
-  getPlayListsSuccess: data => ({
+  getPlaylistsSuccess: data => ({
     type: Types.GET_SUCCESS,
     payload: { data }
   })
