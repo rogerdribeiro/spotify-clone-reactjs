@@ -1,14 +1,16 @@
 import React, { Component } from "react";
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
 import { Creators as PlaylistsActions } from "../../store/ducks/playlists";
+
+import { Link } from "react-router-dom";
 import { Container, NewPlayList, Nav } from "./styles";
 import AddPlayListIcon from "../../assets/images/add_playlist.svg";
+import Loading from "../../components/Loading";
 
 class SideBar extends Component {
   componentDidMount() {
-    console.log("foi");
     this.props.getPlaylistsRequest();
   }
 
@@ -18,7 +20,7 @@ class SideBar extends Component {
         <div>
           <Nav main>
             <li>
-              <a href="">Navegar</a>
+              <Link to="">Navegar</Link>
             </li>
             <li>
               <a href="">Rádio</a>
@@ -60,7 +62,9 @@ class SideBar extends Component {
           <Nav>
             <li>
               <span>PLAYLISTS</span>
+              {this.props.playlists.loading && <Loading />}
             </li>
+
             {this.props.playlists.data.map(playlist => (
               <li key={playlist.id}>
                 <Link to={`playlists/${playlist.id}`}>{playlist.title}</Link>
