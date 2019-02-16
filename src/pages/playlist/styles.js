@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { Spinner } from "../../components/Loading/styles";
 export const Container = styled.div`
   margin-top: 30px;
+  margin-left: 10px;
   ${Spinner} {
     height: 48px;
   }

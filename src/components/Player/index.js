@@ -23,10 +23,14 @@ import PauseIcon from "../../assets/images/pause.svg";
 import ForwardIcon from "../../assets/images/forward.svg";
 import RepeatIcon from "../../assets/images/repeat.svg";
 
-const Player = ({ player, pause, play }) => (
+const Player = ({ player, pause, play, prev, next }) => (
   <Container>
     {!!player.currentSong && (
-      <Sound url={player.currentSong.file} playStatus={player.status} />
+      <Sound
+        url={player.currentSong.file}
+        playStatus={player.status}
+        onFinishedPlaying={next}
+      />
     )}
     <Current>
       {!!player.currentSong && (
@@ -49,7 +53,7 @@ const Player = ({ player, pause, play }) => (
         <button>
           <img src={ShuffeIcon} alt="button" />
         </button>
-        <button>
+        <button onClick={prev}>
           <img src={BackwardIcon} alt="button" />
         </button>
         {!!player.currentSong && player.status === Sound.status.PLAYING ? (
@@ -61,7 +65,7 @@ const Player = ({ player, pause, play }) => (
             <img src={PlayIcon} alt="button" />
           </button>
         )}
-        <button>
+        <button onClick={next}>
           <img src={ForwardIcon} alt="button" />
         </button>
         <button>
