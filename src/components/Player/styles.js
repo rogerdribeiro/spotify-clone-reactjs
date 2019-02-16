@@ -9,6 +9,7 @@ export const Container = styled.div`
   padding: 12px;
 `;
 export const Current = styled.div`
+  width: 220px;
   display: flex;
   align-items: center;
   img {
