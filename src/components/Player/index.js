@@ -3,6 +3,8 @@ import Slider from "rc-slider";
 import Sound from "react-sound";
 
 import { connect } from "react-redux";
+import { Creators as PlayerActions } from "../../store/ducks/player";
+import { bindActionCreators } from "redux";
 
 import {
   Container,
@@ -17,10 +19,11 @@ import VolumeIcon from "../../assets/images/volume.svg";
 import ShuffeIcon from "../../assets/images/shuffle.svg";
 import BackwardIcon from "../../assets/images/backward.svg";
 import PlayIcon from "../../assets/images/play.svg";
+import PauseIcon from "../../assets/images/pause.svg";
 import ForwardIcon from "../../assets/images/forward.svg";
 import RepeatIcon from "../../assets/images/repeat.svg";
 
-const Player = ({ player }) => (
+const Player = ({ player, pause, play }) => (
   <Container>
     {!!player.currentSong && (
       <Sound url={player.currentSong.file} playStatus={player.status} />
@@ -49,9 +52,15 @@ const Player = ({ player }) => (
         <button>
           <img src={BackwardIcon} alt="button" />
         </button>
-        <button>
-          <img src={PlayIcon} alt="button" />
-        </button>
+        {!!player.currentSong && player.status === Sound.status.PLAYING ? (
+          <button onClick={pause}>
+            <img src={PauseIcon} alt="button" />
+          </button>
+        ) : (
+          <button onClick={play}>
+            <img src={PlayIcon} alt="button" />
+          </button>
+        )}
         <button>
           <img src={ForwardIcon} alt="button" />
         </button>
@@ -88,4 +97,10 @@ const mapStateToProps = state => ({
   player: state.player
 });
 
-export default connect(mapStateToProps)(Player);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(PlayerActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Player);
