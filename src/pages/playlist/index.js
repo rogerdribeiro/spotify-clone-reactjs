@@ -5,11 +5,14 @@ import { Creators as PlaylistDetailsActions } from "../../store/ducks/playlistDe
 import { Creators as PlayerActions } from "../../store/ducks/player";
 
 import Loading from "../../components/Loading";
-import { Container, Header, SongList } from "./styles";
+import { Container, Header, SongList, SongItem } from "./styles";
 import ClockIcon from "../../assets/images/clock.svg";
 import PlusIcon from "../../assets/images/plus.svg";
 
 class Playlist extends Component {
+  state = {
+    selectedSong: null
+  };
   componentDidMount() {
     this.loadPlaylistDetails();
   }
@@ -56,9 +59,15 @@ class Playlist extends Component {
               </tr>
             ) : (
               playlist.songs.map(song => (
-                <tr
+                <SongItem
                   key={song.id}
+                  onClick={() => this.setState({ selectedSong: song.id })}
                   onDoubleClick={() => this.props.loadSong(song)}
+                  selected={this.state.selectedSong === song.id}
+                  playing={
+                    this.props.currentSong &&
+                    this.props.currentSong.id === song.id
+                  }
                 >
                   <td>
                     <img src={PlusIcon} alt="plus" />
@@ -67,7 +76,7 @@ class Playlist extends Component {
                   <td>{song.author}</td>
                   <td>{song.album}</td>
                   <td>3:26</td>
-                </tr>
+                </SongItem>
               ))
             )}
           </tbody>
@@ -88,7 +97,8 @@ class Playlist extends Component {
 }
 
 const mapStateToProps = state => ({
-  playlistDetails: state.playlistDetails
+  playlistDetails: state.playlistDetails,
+  currentSong: state.player.currentSong
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...PlaylistDetailsActions, ...PlayerActions }, dispatch);
