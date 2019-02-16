@@ -4,26 +4,25 @@ export const Types = {
 };
 
 const INITIAL_STATE = {
-  data: [],
-  loading: false
+  visible: false,
+  message: null
 };
 
-export default function(state = INITIAL_STATE, action) {
+export default function error(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case Types.GET_REQUEST:
-      return { ...state, loading: true };
-    case Types.GET_SUCCESS:
-      return { ...state, loading: false, data: action.payload.data };
+    case Types.SET:
+      return { ...state, visible: true, message: action.payload.message };
+    case Types.HIDE:
+      return { ...state, visible: false };
     default:
       return state;
   }
 }
 
 export const Creators = {
-  getPlaylistsRequest: () => ({ type: Types.GET_REQUEST }),
+  setError: message => ({ type: Types.SET, playload: { message } }),
 
-  getPlaylistsSuccess: data => ({
-    type: Types.GET_SUCCESS,
-    payload: { data }
+  hideError: () => ({
+    type: Types.HIDE
   })
 };

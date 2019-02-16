@@ -23,6 +23,7 @@ class Playlist extends Component {
     const { id } = this.props.match.params;
     this.props.getPlaylistDetailsRequest(id);
   };
+
   renderDetails = () => {
     const playlist = this.props.playlistDetails.data;
     return (

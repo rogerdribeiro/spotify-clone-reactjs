@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import GlobalStyle from "./styles/global";
 
+import ErrorBox from "./components/ErrorBox";
 import SideBar from "./components/SideBar";
 import Player from "./components/Player";
 import Header from "./components/Header";
@@ -22,6 +23,7 @@ export default class App extends Component {
               <Container>
                 <SideBar />
                 <Content>
+                  <ErrorBox />
                   <Header />
                   <Routes />
                 </Content>

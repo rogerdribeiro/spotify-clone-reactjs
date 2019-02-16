@@ -18,5 +18,9 @@ body{
   font-family: 'Montserrat', sans-serif;
   color: #fff;
 }
+
+button{
+  cursor: pointer;
+}
 `;
 export default GlobalStyle;
